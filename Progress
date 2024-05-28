@@ -1,0 +1,55 @@
+package org.example;
+
+import org.testng.annotations.Test;
+
+public class Progress {
+
+    // Базовый класс "Прогрессия"
+    static abstract class Progression {
+        protected double firstMember;
+
+        protected double constanta;
+
+        Progression(double firstMember, double constanta) {
+            this.firstMember = firstMember;
+            this.constanta = constanta;
+        }
+    }
+
+    static class ArProgression extends Progression {
+        ArProgression(double firstMember, double diff) {
+            super(firstMember, diff);
+        }
+        public double sum(int n) {
+            return n * (2 * firstMember + (n - 1) * constanta) / 2;
+        }
+
+    }
+
+    static class GeoProgress extends Progression {
+        GeoProgress(double firstMember, double relation) {
+            super(firstMember,relation);
+        }
+
+        public double sum(int n){
+            return firstMember * (1 - Math.pow(constanta, n)) / (1 - constanta);
+        }
+    }
+
+    public static void main(String[] args) {
+        // Арифметическая прогрессия
+        ArProgression ar = new ArProgression(5, 7);
+        System.out.println("Сумма арифметической прогрессии: " + ar.sum(3));
+
+        // Геометрическая прогрессия
+        GeoProgress geo = new GeoProgress(5, 7);
+        System.out.println("Сумма геометрической прогрессии: " + geo.sum(3));
+    }
+
+}
+
+
+
+
+
+
